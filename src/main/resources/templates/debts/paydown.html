@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container">
+
+<h1 th:text="${title}">DebtSlayer</h1>
+
+
+<p th:text="${user.username}"></p>
+
+<p>With the list of debts you've given, you will end up paying
+    <span th:text="'$' + ${#numbers.formatDecimal(totalPaid, 1, 2)}"></span> over the course of <span th:text="${months}"></span> months.</p>
+
+
+
+
+</body>
+</html>

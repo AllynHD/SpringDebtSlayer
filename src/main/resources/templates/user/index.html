@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1>DebtSlayer - Your Quest Awaits You!</h1>
+
+<hr />
+
+<h3>Welcome, <span th:text="${user.username}">is anyone there?</span></h3>
+
+<p th:unless="${user.debts} and ${user.debts.size()}"><strong><i>No debts listed at this time. WOOHOO!</i></strong></p>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<table th:if="${user.debts} and ${user.debts.size()}">
+    <th>
+        <tr>
+            <td>Debt Name</td>
+            <td>Debt Balance</td>
+            <td>Monthly Payment</td>
+            <td>Interest Rate</td>
+            <td>Edit/Remove</td>
+        </tr>
+    </th>
+    <tbody>
+    <tr th:each="debt : ${user.debts}">
+        <td  th:text="${debt.name}" th:name="name" ></td>
+        <td  th:text="'$' + ${#numbers.formatDecimal(debt.initialBalance, 1, 2)}" th:name="initialBalance" ></td>
+        <td  th:text="'$' + ${#numbers.formatDecimal(debt.monthlyPayment, 1, 2)}" th:name="monthlyPayment" ></td>
+        <td  th:text="${#numbers.formatDecimal(debt.interestRate, 1, 2) + '%'}" th:name="interestRate" ></td>
+        <td><a th:href="@{/debts/id/} + ${debt.debtId}">Edit/Remove</a></td>
+
+    </tr>
+    </tbody>
+
+</table>
+
+
+<form th:action="@{/debts/paydown}" method="post">
+
+    <input type="radio" name="paydown" value="minimum" checked="checked" /> Make minimum payments
+    <input type="radio" name="paydown" value="snowball" /> Roll finished payments into next debt (the Debt Snowball)
+<!--    <input type="radio" name="paydown" value="both" /> Show me both versions to see them both -->
+
+
+    <input type="submit" value="Pay them Down!" th:if="${user.debts.size()} &gt; 0" />
+
+
+</form>
+
+<nav th:replace="fragments :: UserNav"></nav>
+
+</body>
+</html>

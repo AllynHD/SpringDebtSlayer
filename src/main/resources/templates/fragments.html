@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8" />
+    <title th:text="${title}">DebtSlayer</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+    <script rel="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" />
+</head>
+<body>
+
+<nav th:fragment="navigation">
+    <a href="/debts/add">Add a Debt for Tracking</a> |
+    <a href="/logout"> Log out</a>
+</nav>
+
+
+<nav th:fragment="RegNav">
+    <a href="/register">Register a New User</a>
+</nav>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Add a debt</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+<hr />
+
+<form th:object="${debt}" method="post" th:fragment="AddDebt">
+    <div>
+        <label th:for="name">
+        <p><span class="error">*</span>Debt Name: </p>
+        <input type="text" th:field="*{name}" placeholder="Give your debt a name" />
+        <span class="error" th:errors="*{name}"></span>
+        </label>
+    </div>
+
+    <div>
+    <label th:for="initialBalance">
+        <p><span class="error">*</span>Current Balance: </p>
+        <input type="text" th:field="*{initialBalance}" placeholder="Digits/decimals only, e.g. 245.73" />
+        <span class="error" th:errors="*{initialBalance}"></span>
+    </label>
+    </div>
+
+    <div>
+    <label th:for="monthlyPayment">
+        <p><span class="error">*</span>Minimum Monthly Payment: </p>
+        <input type="text" th:field="*{monthlyPayment}" placeholder="Digits/decimals only"/>
+        <span class="error" th:errors="*{monthlyPayment}"></span>
+
+    </label>
+    </div>
+
+    <div>
+    <label th:for="interestRate">
+        <p>Interest Rate (no % sign needed): </p>
+        <input type="text" th:field="*{interestRate}" placeholder="E.g., for 3.49%, type 3.49"/>
+        <span class="error" th:errors="*{interestRate}"></span>
+
+    </label>
+    </div>
+
+    <input type="hidden" th:id="${user}" th:attr="name='user'" th:value = "${user.id}"/>
+
+
+    <div>
+        <br/>
+    <input type="submit" value="Add Debt" />
+    </div>
+
+    <p th:text="${errors}"></p>
+
+</form>
+
+<br/>
+<p>"<span class="error">*</span>" indicates Required Field.</p>
+
+<nav th:replace="fragments :: UserNav"></nav>
+
+</body>
+</html>
